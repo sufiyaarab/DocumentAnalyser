@@ -1,0 +1,29 @@
+def search_keyword_in_files(folder_path, keyword):
+    # Check if the folder path is valid
+    if not os.path.exists(folder_path) or not os.path.isdir(folder_path):
+        print("Invalid folder path or folder does not exist.")
+        return
+
+    # Iterate through each file in the folder
+    for filename in os.listdir(folder_path):
+        file_path = os.path.join(folder_path, filename)
+
+        # Check if the path is a file and not a directory
+        if os.path.isfile(file_path):
+            try:
+                # Open and read the content of the file
+                with open(file_path, 'r', encoding='utf-8') as file:
+                    content = file.read()
+
+                    # Check if the keyword is present in the file
+                    if keyword in content:
+                        print(f"Keyword '{keyword}' found in file: {file_path}")
+
+            except Exception as e:
+                print(f"Error reading file {file_path}: {str(e)}")
+
+# Example usage:
+folder_path = input("Enter the folder path: ")
+keyword = input("Enter the keyword to search for: ")
+
+search_keyword_in_files(folder_path, keyword)
